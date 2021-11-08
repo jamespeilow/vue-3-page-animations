@@ -1,28 +1,21 @@
 <template>
-  <div class="grid">
-    <div class="column">
+  <div
+    class="grid"
+    :style="gridStyles"
+  >
+    <div
+      v-for="(item, index) in items"
+      class="column"
+    >
       <p class="column__number">
-        01
+        {{ formatNumber(index + 1) }}
       </p>
       <div class="column__content">
-        Spider-Man: Far From Home
+        {{ item.title }}
       </div>
       <div class="column__hover-content">
         <p class="column__hover-text">
-          Spider-Man: Far From Home
-        </p>
-      </div>
-    </div>
-    <div class="column">
-      <p class="column__number">
-        01
-      </p>
-      <div class="column__content">
-        Spider-Man: Far From Home
-      </div>
-      <div class="column__hover-content">
-        <p class="column__hover-text">
-          Spider-Man: Far From Home
+          {{ item.title }}
         </p>
       </div>
     </div>
@@ -30,13 +23,48 @@
 </template>
 <script>
 export default {
-  
+  data() {
+    return {
+      items: [
+        {
+          title: 'Spider-Man: Far From Home',
+        },
+        {
+          title: 'Avengers Endgame',
+        },
+        {
+          title: 'Guardians of the Galaxy Vol. 2',
+        },
+        {
+          title: 'Captain Marvel',
+        },
+        {
+          title: 'Thor: Ragnarok',
+        }
+      ]
+    }
+  },
+
+  computed: {
+    gridStyles() {
+      return {
+        gridTemplateColumns: `repeat(${this.items.length}, 1fr)`
+      }
+    }
+  },
+
+  methods: {
+    formatNumber(number) {
+      const numberString = number.toString()
+      return numberString.length > 1 ? numberString : `0${numberString}`
+    }
+  }
 }
 </script>
+
 <style lang="scss">
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   outline: 1px solid;
   height: 100vh;
 }
