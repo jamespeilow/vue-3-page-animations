@@ -78,20 +78,24 @@ export default {
   overflow: hidden;
 
   &__number {
+    -webkit-text-stroke: 1px #ffffff;
+    color: transparent;
     font-size: 4rem;
     font-weight: 900;
     position: absolute;
     left: -0.5rem;
     top: 0;
+    z-index: 1;
   }
 
   &__content {
     color: #ffffff;
     font-weight: bold;
-    padding: 0.5rem 0;
+    padding: 1rem 0.5rem;
     text-align: left;
-    transform: rotate(-90deg);
-    transform-origin: top left;
+    transform: rotate(-180deg);
+    writing-mode: vertical-rl;
+    z-index: 1;
   }
 
   &__hover-content {
@@ -108,9 +112,11 @@ export default {
   }
 
   &__hover-text {
-    font-size: 4rem;
+    -webkit-text-stroke: 1px #ffffff;
+    color: transparent;
+    font-size: 3.75rem;
     font-weight: 900;
-    margin: 0;
+    margin: 1rem 0 0;
     text-transform: uppercase;
     transform: rotate(180deg);
     writing-mode: vertical-rl;
