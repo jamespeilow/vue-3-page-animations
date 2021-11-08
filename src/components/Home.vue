@@ -6,6 +6,9 @@
     <div
       v-for="(item, index) in items"
       class="column"
+      :style="{
+        backgroundImage: `url(${item.image}`
+      }"
     >
       <p class="column__number">
         {{ formatNumber(index + 1) }}
@@ -13,7 +16,10 @@
       <div class="column__content">
         {{ item.title }}
       </div>
-      <div class="column__hover-content">
+      <div
+        class="column__hover-content"
+        :style="{ backgroundColor: item.color }"
+      >
         <p class="column__hover-text">
           {{ item.title }}
         </p>
@@ -27,19 +33,29 @@ export default {
     return {
       items: [
         {
-          title: 'Spider-Man: Far From Home',
+          color: '#5A3020',
+          image: 'https://images.igdb.com/igdb/image/upload/t_original/ar4sz.jpg',
+          title: 'The Legend of Zelda: Breath of the Wild',
         },
         {
-          title: 'Avengers Endgame',
+          color: '#4B4319',
+          image: 'https://images.igdb.com/igdb/image/upload/t_original/hj3spi7odlvp4pfvnwtv.jpg',
+          title: 'Super Mario Odyssey',
         },
         {
-          title: 'Guardians of the Galaxy Vol. 2',
+          color: '#542662',
+          image: 'https://images.igdb.com/igdb/image/upload/t_original/ar7u5.jpg',
+          title: 'Celeste',
         },
         {
-          title: 'Captain Marvel',
+          color: '#003345',
+          image: 'https://images.igdb.com/igdb/image/upload/t_original/m18xmrbbbzlmh8bru5lm.jpg',
+          title: 'Hollow Knight',
         },
         {
-          title: 'Thor: Ragnarok',
+          color: '#750525',
+          image: 'https://images.igdb.com/igdb/image/upload/t_original/fd9fak2dziwkrewahczb.jpg',
+          title: 'Mario Kart 8 Deluxe',
         }
       ]
     }
@@ -71,11 +87,21 @@ export default {
 
 .column {
   background: rgba(0,0,0,0.5);
+  background-size: cover;
+  background-position: center;
   display: flex;
   height: 100%;
   position: relative;
   align-items: flex-end;
   overflow: hidden;
+  position: relative;
+
+  &:after {
+    content: '';
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    inset: 0;
+  }
 
   &__number {
     -webkit-text-stroke: 1px #ffffff;
