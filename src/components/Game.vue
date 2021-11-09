@@ -1,6 +1,9 @@
 <template>
   <main class="content">
     <div class="content__wrapper">
+      <router-link to="/">
+        Back to home
+      </router-link>
       <h1 class="content__title">Title</h1>
       <p class="content__meta">
         Release date: dd/mm/yyyy

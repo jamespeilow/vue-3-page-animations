@@ -3,10 +3,11 @@
     class="grid"
     :style="gridStyles"
   >
-    <div
+    <router-link
       v-for="(item, index) in items"
       :key="item.title"
       class="column"
+      to="/game"
       :style="{
         backgroundImage: `url(${item.image}`
       }"
@@ -31,7 +32,7 @@
           </p>
         </div>
       </transition>
-    </div>
+    </router-link>
   </div>
 </template>
 <script>
