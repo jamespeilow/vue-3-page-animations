@@ -1,61 +1,55 @@
 <template>
-  <transition
-    @before-enter="beforeEnter"
-    @enter="enter"
-    @leave="leave"
-    :css="false"
-    appear
-    mode="out-in"
+  <div
+    class="grid"
+    :style="gridStyles"
   >
-    <div
-      class="grid"
-      :style="gridStyles"
+    <router-link
+      v-for="(item, index) in items"
+      :key="item.title"
+      class="column"
+      to="/game"
+      :style="{
+        backgroundImage: `url(${item.image}`
+      }"
+      @mouseover="handleMouseOver(item)"
+      @mouseleave="item.showOverlay = false"
     >
-      <router-link
-        v-for="(item, index) in items"
-        :key="item.title"
-        class="column"
-        to="/game"
-        :style="{
-          backgroundImage: `url(${item.image}`
-        }"
-        @mouseover="handleMouseOver(item)"
-        @mouseleave="item.showOverlay = false"
-      >
-        <p class="column__number">
-          {{ formatNumber(index + 1) }}
-        </p>
-        <div class="column__content">
-          {{ item.title }}
-        </div>
+      <p class="column__number">
+        {{ formatNumber(index + 1) }}
+      </p>
+      <div class="column__content">
+        {{ item.title }}
+      </div>
 
-        <transition
-          @before-enter="overlayBeforeEnter"
-          @enter="overlayEnter"
-          @leave="overlayLeave"
-          :css="false"
+      <transition
+        @before-enter="overlayBeforeEnter"
+        @enter="overlayEnter"
+        @leave="overlayLeave"
+        :css="false"
+      >
+        <div
+          v-if="item.showOverlay"
+          class="column__hover-content"
+          :style="{ backgroundColor: item.color }"
         >
-          <div
-            v-if="item.showOverlay"
-            class="column__hover-content"
-            :style="{ backgroundColor: item.color }"
-          >
-            <p class="column__hover-text">
-              {{ item.title }}
-            </p>
-          </div>
-        </transition>
-      </router-link>
-    </div>
-  </transition>
+          <p class="column__hover-text">
+            {{ item.title }}
+          </p>
+        </div>
+      </transition>
+    </router-link>
+  </div>
 </template>
 <script>
 import gsap from 'gsap'
 
 export default {
+  props: {
+    transitionEnded: Boolean,
+  },
+
   data() {
     return {
-      loaded: false,
       items: [
         {
           color: '#5A3020',
@@ -106,42 +100,8 @@ export default {
     },
 
     handleMouseOver(item) {
-      if (!this.loaded) { return }
+      if (!this.transitionEnded) { return }
       item.showOverlay = true
-    },
-
-    /**
-     * Transitions
-     */
-    beforeEnter(el) {
-      this.$nextTick(() => {
-        gsap.set('.column', {
-          clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
-        })
-      })
-    },
-
-    enter(el, done) {
-      console.log('enter firing')
-      gsap.to('.column', {
-        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-        duration: 0.5,
-        stagger: 0.2,
-        onComplete: () => {
-          this.loaded = true;
-          done()
-        },
-      })
-    },
-
-    leave(el, done) {
-      console.log('leave firing')
-      gsap.to('.column', {
-        opacity: 0,
-        translateY: '100%',
-        duration: 5,
-        onComplete: done,
-      })
     },
 
     overlayBeforeEnter(el) {
