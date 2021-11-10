@@ -33,7 +33,7 @@
           @before-enter="overlayBeforeEnter"
           @enter="overlayEnter"
           @leave="overlayLeave"
-          css="false"
+          :css="false"
         >
           <div
             v-if="item.showOverlay"
@@ -153,7 +153,6 @@ export default {
     },
 
     overlayEnter(el, done) {
-      console.log('enter')
       gsap.to(el, {
         clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
         duration: 0.35,
@@ -162,7 +161,6 @@ export default {
     },
 
     overlayLeave(el, done) {
-      console.log('leave')
       gsap.to(el, {
         clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
         duration: 0.35,
