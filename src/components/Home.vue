@@ -116,7 +116,7 @@ export default {
     beforeEnter(el) {
       this.$nextTick(() => {
         gsap.set('.column', {
-          opacity: 0,
+          clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
         })
       })
     },
@@ -124,7 +124,7 @@ export default {
     enter(el, done) {
       console.log('enter firing')
       gsap.to('.column', {
-        opacity: 1,
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
         duration: 0.5,
         stagger: 0.2,
         onComplete: () => {
