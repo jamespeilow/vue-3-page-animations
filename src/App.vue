@@ -1,8 +1,8 @@
 <template>
   <router-view v-slot="{ Component, route }">
     <transition
-      @before-enter="(el) => beforeEnter(el, route.path)"
-      @enter="(el, done) => enter(el, done, route.path)"
+      @before-enter="(el) => beforeEnter(el, route)"
+      @enter="(el, done) => enter(el, done, route)"
       @leave="(el, done) => leave(el, done)"
       mode="out-in"
       :css="false"
@@ -20,6 +20,8 @@
 <script>
 import gsap from 'gsap'
 
+import home from './scripts/transitions/home'
+
 export default {
   data () {
     return {
@@ -31,41 +33,28 @@ export default {
     /**
      * Transitions
      */
-    beforeEnter(el, path) {
-      console.log(path)
+    beforeEnter(el, route, component) {
       gsap.set('.overlay', {
         width: '0%',
       })
 
-      this.$nextTick(() => {
-        if (!document.querySelector('.column')) { 
-          return
-        }
-
-        gsap.set('.column', {
-          clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
-        })
-      })
+      switch(route.path) {
+        case '/':
+          this.$nextTick(() => {
+            home.beforeEnter(el)
+          })
+          break
+      }
     },
 
-    enter(el, done, path) {
-      console.log(path)
-      console.log('enter firing')
-
-      if (!el.querySelector('.column')) { 
-        done()
-        return
-      }
-
-      gsap.to('.column', {
-        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-        duration: 0.5,
-        stagger: 0.2,
-        onComplete: () => {
-          this.transitionEnded = true;
+    enter(el, done, route, component) {
+      switch (route.path) {
+        case '/':
+          home.enter(el, done)
+          break
+        default:
           done()
-        },
-      })
+      }
     },
 
     leave(el, done) {
