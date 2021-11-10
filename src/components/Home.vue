@@ -1,41 +1,51 @@
 <template>
-  <div
-    class="grid"
-    :style="gridStyles"
+  <transition
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @leave="leave"
+    :css="false"
+    appear
   >
-    <router-link
-      v-for="(item, index) in items"
-      :key="item.title"
-      class="column"
-      to="/game"
-      :style="{
-        backgroundImage: `url(${item.image}`
-      }"
-      @mouseover="item.showOverlay = true"
-      @mouseleave="item.showOverlay = false"
+    <div
+      class="grid"
+      :style="gridStyles"
     >
-      <p class="column__number">
-        {{ formatNumber(index + 1) }}
-      </p>
-      <div class="column__content">
-        {{ item.title }}
-      </div>
-
-      <transition>
-        <div
-          v-if="item.showOverlay"
-          class="column__hover-content"
-          :style="{ backgroundColor: item.color }"
-        >
-          <p class="column__hover-text">
-            {{ item.title }}
-          </p>
+      <router-link
+        v-for="(item, index) in items"
+        :key="item.title"
+        class="column"
+        to="/game"
+        :style="{
+          backgroundImage: `url(${item.image}`
+        }"
+        @mouseover="item.showOverlay = true"
+        @mouseleave="item.showOverlay = false"
+      >
+        <p class="column__number">
+          {{ formatNumber(index + 1) }}
+        </p>
+        <div class="column__content">
+          {{ item.title }}
         </div>
-      </transition>
-    </router-link>
-  </div>
+
+        <transition>
+          <div
+            v-if="item.showOverlay"
+            class="column__hover-content"
+            :style="{ backgroundColor: item.color }"
+          >
+            <p class="column__hover-text">
+              {{ item.title }}
+            </p>
+          </div>
+        </transition>
+      </router-link>
+    </div>
+  </transition>
 </template>
 <script>
+import gsap from 'gsap'
+
 export default {
   data() {
     return {
@@ -86,6 +96,36 @@ export default {
     formatNumber(number) {
       const numberString = number.toString()
       return numberString.length > 1 ? numberString : `0${numberString}`
+    },
+
+    /**
+     * Transitions
+     */
+    beforeEnter(el) {
+      this.$nextTick(() => {
+        gsap.set('.column', {
+          opacity: 0,
+        })
+      })
+    },
+
+    enter(el, done) {
+      console.log('enter firing')
+      gsap.to('.column', {
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.2,
+        onComplete: done
+      })
+    },
+
+    leave(el, done) {
+      console.log('leave firing')
+      gsap.to('.column', {
+        opacity: 0,
+        duration: 5,
+        onComplete: done
+      })
     }
   }
 }
