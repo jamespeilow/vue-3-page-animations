@@ -13,7 +13,7 @@ function beforeEnter(el) {
   })
 }
 
-function enter(el, done) {
+function enter(el, onComplete) {
   if (!el.querySelector('.column')) { 
     done()
     return
@@ -23,10 +23,7 @@ function enter(el, done) {
     clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
     duration: 0.5,
     stagger: 0.2,
-    onComplete: () => {
-      this.transitionEnded = true;
-      done()
-    },
+    onComplete,
   })
 }
 

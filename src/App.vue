@@ -20,7 +20,7 @@
 <script>
 import gsap from 'gsap'
 
-import home from './scripts/transitions/home'
+import homeTransitions from './scripts/transitions/home'
 
 export default {
   data () {
@@ -41,16 +41,22 @@ export default {
       switch(route.path) {
         case '/':
           this.$nextTick(() => {
-            home.beforeEnter(el)
+            homeTransitions.beforeEnter(el)
+          })
+          break
           })
           break
       }
     },
 
-    enter(el, done, route, component) {
+    enter(el, done, route) {
       switch (route.path) {
         case '/':
-          home.enter(el, done)
+          homeTransitions.enter(el, () => {
+            this.transitionEnded = true
+            done()
+          })
+          break
           break
         default:
           done()
