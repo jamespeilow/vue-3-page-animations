@@ -5,6 +5,7 @@
     @leave="leave"
     :css="false"
     appear
+    mode="out-in"
   >
     <div
       class="grid"
@@ -18,7 +19,7 @@
         :style="{
           backgroundImage: `url(${item.image}`
         }"
-        @mouseover="item.showOverlay = true"
+        @mouseover="handleMouseOver(item)"
         @mouseleave="item.showOverlay = false"
       >
         <p class="column__number">
@@ -28,7 +29,12 @@
           {{ item.title }}
         </div>
 
-        <transition>
+        <transition
+          @before-enter="overlayBeforeEnter"
+          @enter="overlayEnter"
+          @leave="overlayLeave"
+          css="false"
+        >
           <div
             v-if="item.showOverlay"
             class="column__hover-content"
@@ -49,6 +55,7 @@ import gsap from 'gsap'
 export default {
   data() {
     return {
+      loaded: false,
       items: [
         {
           color: '#5A3020',
@@ -98,6 +105,11 @@ export default {
       return numberString.length > 1 ? numberString : `0${numberString}`
     },
 
+    handleMouseOver(item) {
+      if (!this.loaded) { return }
+      item.showOverlay = true
+    },
+
     /**
      * Transitions
      */
@@ -115,7 +127,10 @@ export default {
         opacity: 1,
         duration: 0.5,
         stagger: 0.2,
-        onComplete: done
+        onComplete: () => {
+          this.loaded = true;
+          done()
+        },
       })
     },
 
@@ -123,10 +138,38 @@ export default {
       console.log('leave firing')
       gsap.to('.column', {
         opacity: 0,
+        translateY: '100%',
         duration: 5,
+        onComplete: done,
+      })
+    },
+
+    overlayBeforeEnter(el) {
+      this.$nextTick(() => {
+        gsap.set(el, {
+          clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
+        })
+      })
+    },
+
+    overlayEnter(el, done) {
+      console.log('enter')
+      gsap.to(el, {
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+        duration: 0.35,
         onComplete: done
       })
-    }
+    },
+
+    overlayLeave(el, done) {
+      console.log('leave')
+      gsap.to(el, {
+        clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
+        duration: 0.35,
+        delay: 0.25,
+        onComplete: done
+      })
+    },
   }
 }
 </script>
@@ -179,7 +222,6 @@ export default {
 
   &__hover-content {
     background: red;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     display: flex;
     justify-content: center;
     height: 100%;
@@ -188,19 +230,6 @@ export default {
     top: 0;
     width: 100%;
     z-index: 2;
-
-    &.v-enter-active {
-      transition: clip-path 0.35s ease-in-out;
-    }
-
-    &.v-leave-active {
-      transition: clip-path 0.25s ease-in-out;
-    }
-
-    &.v-enter-from,
-    &.v-leave-to {
-      clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-    }
   }
 
   &__hover-text {
