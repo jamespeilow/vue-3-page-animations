@@ -135,12 +135,12 @@ export default {
 <style lang="scss">
 .grid {
   display: grid;
-  outline: 1px solid;
-  height: 100vh;
+  height: calc(100vh - 50px);
+  position: relative;
+  top: 50px;
 }
 
 .column {
-  background: rgba(0,0,0,0.5);
   background-size: cover;
   background-position: center;
   display: flex;
@@ -149,6 +149,7 @@ export default {
   align-items: flex-end;
   overflow: hidden;
   position: relative;
+  text-decoration: none;
 
   &:after {
     content: '';

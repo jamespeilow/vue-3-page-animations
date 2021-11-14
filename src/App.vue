@@ -1,4 +1,5 @@
 <template>
+  <main-header />
   <router-view v-slot="{ Component, route }">
     <transition
       @before-enter="(el) => beforeEnter(el, route)"
@@ -23,7 +24,13 @@ import gsap from 'gsap'
 import gameTransitions from './scripts/transitions/game'
 import homeTransitions from './scripts/transitions/home'
 
+import MainHeader from './components/MainHeader.vue'
+
 export default {
+  components: {
+    MainHeader
+  },
+
   data () {
     return {
       transitionEnded: false
@@ -89,7 +96,7 @@ html, body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #222;
   margin: 0;
   padding: 0;
   min-height: 100vh;
