@@ -20,6 +20,7 @@
 <script>
 import gsap from 'gsap'
 
+import gameTransitions from './scripts/transitions/game'
 import homeTransitions from './scripts/transitions/home'
 
 export default {
@@ -44,6 +45,9 @@ export default {
             homeTransitions.beforeEnter(el)
           })
           break
+        case '/game':
+          this.$nextTick(() => {
+            gameTransitions.beforeEnter(el)
           })
           break
       }
@@ -57,6 +61,8 @@ export default {
             done()
           })
           break
+        case '/game':
+          gameTransitions.enter(el, done)
           break
         default:
           done()
