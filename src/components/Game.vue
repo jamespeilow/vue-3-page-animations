@@ -1,7 +1,7 @@
 <template>
   <main class="content">
     <div class="content__wrapper">
-      <h1 class="content__title">The Legend of Zelda: Breath of the Wild</h1>
+      <h1 class="content__title" data-splitting>The Legend of Zelda: Breath of the Wild</h1>
       <p class="content__meta">
         Release date: 03/03/2017
       </p>
@@ -37,8 +37,10 @@
 </template>
 
 <script>
-export default {
+import "splitting/dist/splitting.css";
+import "splitting/dist/splitting-cells.css";
 
+export default {
 }
 </script>
 
