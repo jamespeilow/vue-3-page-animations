@@ -194,8 +194,9 @@ export default {
   &__hover-text {
     -webkit-text-stroke: 1px #ffffff;
     color: transparent;
-    font-size: 3.75rem;
+    font-size: 3rem;
     font-weight: 900;
+    line-height: 1.2;
     margin: 1rem 0 0;
     text-transform: uppercase;
     transform: rotate(180deg);
