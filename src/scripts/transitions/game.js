@@ -5,6 +5,8 @@ import gsap from 'gsap'
 import Splitting from 'splitting'
 
 function beforeEnter(el) {
+  Splitting()
+
   gsap.set('.content__carousel', {
       x: '100%',
       clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%)',
@@ -30,7 +32,9 @@ function beforeEnter(el) {
 }
 
 function enter(el, onComplete) {
-  Splitting()
+  if (!document.querySelector('.content__title .word')) {
+    Splitting()
+  }
 
   const enterTl = gsap.timeline({
     easing: 'power3.out',
@@ -57,7 +61,7 @@ function enter(el, onComplete) {
     .to('.content__description', {
       opacity: 1,
       y: 0,
-      duration: 1,
+      duration: 1.5,
       ease: 'power2.out',
     }, "<")
     .to('.content__title .word', {

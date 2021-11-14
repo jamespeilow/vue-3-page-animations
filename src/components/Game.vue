@@ -8,7 +8,7 @@
 
       <div class="content__grid">
         <div class="content__video">
-          <iframe width="480" height="270" src="https://www.youtube.com/embed/zw47_q9wbBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="480" height="270" src="https://www.youtube.com/embed/zw47_q9wbBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         
         <div class="content__image content__image--1">
@@ -53,7 +53,7 @@ export default {
   &__wrapper {
     justify-self: end;
     width: 45vw;
-    margin-left: auto;
+    margin: 4rem 2rem 1rem;
   }
 
   &__carousel-wrapper {
@@ -68,10 +68,6 @@ export default {
     position: sticky;
     top: 0;
     right: 0;
-  }
-
-  &__wrapper {
-    margin: 4rem 2rem 1rem;
   }
 
   &__title {
