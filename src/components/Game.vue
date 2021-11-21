@@ -12,15 +12,15 @@
         </div>
         
         <div class="content__image content__image--1">
-          <img src="https://images.igdb.com/igdb/image/upload/t_original/mftmubfp9ntwbreejfi7.jpg">
+          <img src="/images/botw-screen1.jpg">
         </div>
 
         <div class="content__image content__image--2">
-          <img src="https://images.igdb.com/igdb/image/upload/t_original/ayjm7juog9vitiwbfrcz.jpg">
+          <img src="/images/botw-screen2.jpg">
         </div>
 
         <div class="content__image content__image--3">
-          <img src="https://images.igdb.com/igdb/image/upload/t_original/mepn5qujlccdlkhfkwr8.jpg">
+          <img src="/images/botw-screen3.jpg">
         </div>
 
         <p class="content__description">

@@ -38,7 +38,7 @@ function enter(el, onComplete) {
 
   const enterTl = gsap.timeline({
     easing: 'power3.out',
-    onComplete
+    onComplete,
   })
 
   enterTl
