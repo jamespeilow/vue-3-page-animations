@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 
+import 'lite-youtube-embed'
+
 /**
  * Router setup
  */

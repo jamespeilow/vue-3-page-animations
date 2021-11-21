@@ -8,7 +8,7 @@
 
       <div class="content__grid">
         <div class="content__video">
-          <iframe width="480" height="270" src="https://www.youtube.com/embed/zw47_q9wbBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <lite-youtube videoid="zw47_q9wbBE" playlabel="Play: The Legend of Zelda: Breath of the Wild - Nintendo Switch Presentation 2017 Trailer"></lite-youtube>
         </div>
         
         <div class="content__image content__image--1">
@@ -103,7 +103,7 @@ export default {
     grid-row: 1/3;
     min-height: 200px;
     
-    iframe {
+    iframe, lite-youtube {
       width: 100%;
       height: 100%;
     }
