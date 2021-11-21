@@ -53,31 +53,31 @@ export default {
       items: [
         {
           color: '#5A3020',
-          image: 'https://images.igdb.com/igdb/image/upload/t_original/ar4sz.jpg',
+          image: '/images/cover-botw.jpg',
           title: 'The Legend of Zelda: Breath of the Wild',
           showOverlay: false,
         },
         {
           color: '#4B4319',
-          image: 'https://images.igdb.com/igdb/image/upload/t_original/hj3spi7odlvp4pfvnwtv.jpg',
+          image: '/images/cover-mario-odyssey.jpg',
           title: 'Super Mario Odyssey',
           showOverlay: false,
         },
         {
           color: '#542662',
-          image: 'https://images.igdb.com/igdb/image/upload/t_original/ar7u5.jpg',
+          image: '/images/cover-celeste.jpg',
           title: 'Celeste',
           showOverlay: false,
         },
         {
           color: '#003345',
-          image: 'https://images.igdb.com/igdb/image/upload/t_original/m18xmrbbbzlmh8bru5lm.jpg',
+          image: '/images/cover-hollow-knight.jpg',
           title: 'Hollow Knight',
           showOverlay: false,
         },
         {
           color: '#750525',
-          image: 'https://images.igdb.com/igdb/image/upload/t_original/fd9fak2dziwkrewahczb.jpg',
+          image: '/images/cover-mario-kart-8.jpg',
           title: 'Mario Kart 8 Deluxe',
           showOverlay: false,
         }
